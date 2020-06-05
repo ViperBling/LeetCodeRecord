@@ -2252,18 +2252,38 @@ public:
 
 ![image-20200605110854878](LeetCode刷题.assets/image-20200605110854878.png)
 
+打印的顺序是从左到右、从上到下、从右到左、从下到上不断循环。可以设定4个边界，走到对应边界时，边界缩减，然后向另一个方向继续遍历。
 
+算法流程：
+
+- 若矩阵为空，或只有一行，直接返回矩阵
+- 初始化4个边界：`left, right, top, bottom`，用于标定打印的边界
+- 在循环过程中，按照上述的顺序，先到达右边界`right`，再到达下边界`bottom`，再到达左边界`left`，最后到达上边界`top`。直到遍历所有的数为止。
 
 ```c++
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
+		if (matrix.size() == 0 || matrix[0].size() == 0)
+            return {};
+        vector<int> res;
+        int left = 0, right = matrix[0].size()-1, top = 0, bottom = matrix.size()-1;
 
+        while (true) {
+            for (int i = left; i <= right; ++i) res.emplace_back(matrix[top][i]);
+            // 走到最右，向下加一层，判断是否到达边界。下同
+            if (++top > bottom) break;
+            for (int i = top; i <= bottom; ++i) res.emplace_back(matrix[i][right]);
+            if (left > --right) break;
+            for (int i = right; i >= left; --i) res.emplace_back(matrix[bottom][i]);
+            if (top > --bottom) break;
+            for (int i = bottom; i >= top; --i) res.emplace_back(matrix[i][left]);
+            if (++left > right) break;
+        }
+        return res;
     }
-};
+}
 ```
-
-
 
 ## [面试题56 - I. 数组中数字出现的次数](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)
 
