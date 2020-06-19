@@ -506,6 +506,12 @@ public:
 
 已解答
 
+## [60. 第k个排列](https://leetcode-cn.com/problems/permutation-sequence/)
+
+![image-20200618092223835](LeetCode_Label.assets/image-20200618092223835.png)
+
+
+
 # 分治
 
 # 递归

@@ -206,6 +206,54 @@ public:
 };
 ```
 
+## [9. 回文数](https://leetcode-cn.com/problems/palindrome-number/)
+
+![image-20200610103301204](LeetCode.assets/image-20200610103301204.png)
+
+首先，负数不是回文，一个非零数个位为0也不是回文（因为个位数是0，高位必然是0）。对于一个整数，可以通过不断取余的方式得到每位数，为了得到其反转数字，取余后，将余数乘10，然后加上刚刚下一个余数，不断如此就能得到反转数。例如14541，除10取余得到1，再取余得到4，1*10+4=14，就将41反转成了14。
+
+算法流程：
+
+- 输入不为0的时候循环，不断除10取余，然后用余数乘10加上后1位余数得到相反数
+- 如果反转数等于输入说明是回文
+
+```c++
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+        
+        long long tmp = x;
+        long long reverse = 0;
+        while (tmp > 0) {
+            int r = tmp % 10;
+            tmp /= 10;
+            reverse += r * 10;
+        }
+        return x == reverse;
+    }
+};
+```
+
+这种方法是$O(n)$的。其实判断回文只要除到一半就可以了，那么怎么判断是否到了一半呢，当剩余的数小于反转的数时说明已经到了一半。
+
+```c++
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+        int reverse = 0;
+        while (x > reverse) {
+            reverse = reverse * 10 + x % 10;
+            x /= 10;
+        }
+        return x == reverse || x == reverse/10;
+    }
+};
+```
+
+
+
 ## 15. 三数之和
 
 ![image-20200114204825357](LeetCode刷题.assets/image-20200114204825357.png)
@@ -1238,6 +1286,63 @@ public:
 
 时间：$O(n)$，空间：$O(1)$
 
+## [126. 单词接龙 II](https://leetcode-cn.com/problems/word-ladder-ii/)(未完成)
+
+![image-20200608003212573](LeetCode.assets/image-20200608003212573.png)
+
+
+
+```c++
+class Solution {
+public:
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+
+    }
+};
+```
+
+## [128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)
+
+![image-20200608003120265](LeetCode.assets/image-20200608003120265.png)
+
+暴力的方法，对数组中的每个数$x$，以其为起点不断匹配$x+1,x+2...$，然后不断更新最大匹配到的长度。匹配的过程中，每次都要检查$x+1,x+2,...$，这需要$O(n)$的复杂度，使用哈希表的话可以达到$O(1)$的复杂度。但是整体的复杂度依然是$O(n^2)$的，因为嵌套了两层循环，一层是遍历数组，另外一层是查找$x+1,x+2,...$。
+
+这个过程包括了一些重复的枚举，例如对于一个已知的连续序列$x,x+1,x+2,...x+y$，如果我们继续从$x+1$开始枚举，结果肯定不会比之前好，因此在外层遍历数组的时候，遇到这种情况可以直接跳过。具体来说，就是如果当前遍历的元素是$x$，那么我们检查数组中是否有$x-1$，有的话以当前为起点的匹配结果肯定不会优于$x-1$。
+
+算法过程：
+
+- 首先使用集合来进行去重，然后遍历数组
+- 对每个数$x$，检查是否存在$x-1$，如果没有，那么从当前数开始枚举连续序列，并更新最大长度。
+
+```c++
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+		unordered_set<int> numset;
+        int longStreak = 0;
+        for (const int& num : nums)
+            numset.insert(num);
+        
+        for (auto & num : nums) {
+            // 如果不存在num-1，就从当前位置开始计算最大长度
+            if (!numset.count(num - 1)) {
+                int curNum = num;
+                int curStreak = 1;
+                // 利用集合的特点来不断累加连续序列长度
+                while (numset.count(curNum + 1)) {
+                    curNum++;
+                    curStreak++;
+                }
+                longStreak = longStreak > curStreak ? longStreak : curStreak;
+            }
+        }
+        return longStreak;
+    }
+};
+```
+
+
+
 ## [142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)(未完成)
 
 ![image-20200428105359838](LeetCode刷题.assets/image-20200428105359838.png)
@@ -1801,6 +1906,73 @@ public:
 
 ![image-20200415103831162](LeetCode刷题.assets/image-20200415103831162.png)
 
+
+
+## [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
+
+![image-20200611111326749](LeetCode.assets/image-20200611111326749.png)
+
+题目的意思是，对于今天的温度，还要经过几天，才能超过今天的温度。以题目中的例子，今天是73，经过1天到74，74经过1天到75，75经过4天到76，以此类推。
+
+### 暴力法
+
+对每个温度`T[i]`，要找到最小的下标`j`，使`i < j && T[i] < T[j]`。流程如下：
+
+- 遍历数组，当前位置是`i`
+  - 从当前位置向右遍历，下标是`j`，直到遇到一个比`T[i]`大的数`T[j]`，记录距离`j-i`到结果
+
+```c++
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& T) {		
+        int len = T.size();
+        vector<int> res(len);
+
+        for (int i = 0; i < len; ++i) {
+            for (int j = i + 1; j < len; ++j) {
+                if (T[i] < T[j]) {
+                    res[i] = j - i;
+                    break;
+                }                    
+            }
+        }
+        return res;
+    }
+};
+```
+
+直接超时没商量。
+
+### 单调栈
+
+维护一个从栈底到栈顶递减的栈，遍历到当前温度的时候和栈顶元素进行比较，如果比栈顶元素小直接入栈，如果当前数字大于栈顶元素，说明找到了栈顶元素对应的第一个大于它的数，将栈顶元素出栈计算两者距离，然后新元素入栈。
+
+- 遍历数组，第一个元素直接入栈，对于后面的元素
+  - 当栈不空，且栈顶元素小于当前元素时，栈顶元素出栈，计算下标距离加入到结果直到不满足循环条件
+
+```C++
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& T) {		
+        int len = T.size();
+        vector<int> res(len);
+        stack<int> st;
+        
+        for (int i = 0; i < len; ++i) {
+            while (!st.empty() && T[i] > T[st.top()]) {
+                auto t = st.top();
+                st.pop();
+                res[t] = i - t;
+            }
+            st.push(i);
+        }
+        return res;
+    }
+};
+```
+
+
+
 ## [837. 新21点](https://leetcode-cn.com/problems/new-21-game/)
 
 ![image-20200603132430740](LeetCode刷题.assets/image-20200603132430740.png)
@@ -1950,6 +2122,69 @@ public:
             record[mod]++;
         }
         return res;
+    }
+};
+```
+
+## [990. 等式方程的可满足性](https://leetcode-cn.com/problems/satisfiability-of-equality-equations/)
+
+![image-20200608112619919](LeetCode.assets/image-20200608112619919.png)
+
+这题考察的是并查集，并查集中把相同类别的元素放在一个集合中。这里我们可以将不同的变量看成图的结点，具有相等关系`==`的结点之间具有边。这样所有相等的变量都是连通的，也就是一个连通分量。
+
+首先遍历所有的等式，构建并查集，然后遍历所有不等式，同一不等式的两个变量不能同属于一个连通分量。总共分成三步：
+
+- 初始化集合
+- 构建并查集
+- 测试不等式的变量是否在一个连通分量中
+
+```c++
+class UnionFind {
+private:
+    vector<int> parent;
+public:
+    UnionFind() {
+        parent.resize(26);
+        // 对parent赋初值0，使parent[i] = i，0代表从0递增
+        iota(parent.begin(), parent.end(), 0);
+    }
+    
+    int find(int idx) {
+        // idx == parent[idx]说明是孤立点直接返回
+        if (idx == parent[idx])
+            return idx;
+        
+        parent[idx] = find(parent[idx]);
+        return parent[idx];
+    }
+    
+    void unite(int idx1, int idx2) {
+        parent[find(idx1)] = find(idx2);
+    }
+};
+class Solution {
+public:
+    bool equationsPossible(vector<string>& equations) {
+        UnionFind uf;
+		if (equations.empty()) return true;
+        
+        // 构建并查集
+        for (const string& s : equations) {
+            if (s[1] == '=') {
+                int idx1 = s[0] - 'a';
+                int idx2 = s[3] - 'a';
+                uf.unite(idx1, idx2);
+            }
+        }
+        // 测试不等式
+        for (const string& s : equations) {
+            if (s[1] == '!') {
+                int idx1 = s[0] - 'a';
+                int idx2 = s[3] - 'a';
+                if (uf.find(idx1) == uf.find(idx2)) return false;
+            }
+        }
+        return true;
     }
 };
 ```
@@ -2284,6 +2519,65 @@ public:
     }
 }
 ```
+
+## [面试题46. 把数字翻译成字符串](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
+
+![image-20200609095328102](LeetCode.assets/image-20200609095328102.png)
+
+假设$f(i)$是字符串中以索引$i$为结尾的数字能够组成字符串的种类。如果第$i$位和$i-1$位数字组成的数不在10-25的范围内，那么$f(i) = f(i-1)$；如果组成的数字在10-25的范围，那么这个数可以被翻译成字母，那么$f(i) = f(i+1) + f(i-2)$.所以可以列出状态转移方程：
+$$
+f(i) = \begin{cases} f(i-1)
+\\f(i-1) + f(i-2), & i-1 \geq 0, 10 \leq x\leq 25
+\end{cases}
+$$
+边界条件是$f(-1) = 0,f(0)=1$。
+
+```c++
+class Solution {
+public:
+    int translateNum(int num) {
+		string tmp = to_string(num);
+        int len = tmp.size();
+        vector<int> dp(len+1, 0);
+        dp[0] = 1;	// 统一递推式
+        dp[1] = 1;	// 只有1个字母的情况
+
+        for (int i = 2; i < len+1; ++i) {
+            dp[i] = dp[i-1];
+            // 只有i-2的位置为1或者2，才能和i-1位组成转换字母的数
+            if (tmp[i-2] != '1' && tmp[i-2] != '2') continue;
+            // i-2是2，i-1大于5也不能转换，直接使用第一个方程
+            if (tmp[i-2] == '2' && tmp[i-1] > '5') continue;
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[len];
+    }
+};
+```
+
+当前位置的数之和前面两位有关，可以对空间进行压缩，设置三个变量保存`i-2,i-1,i`：
+
+```c++
+class Solution {
+public:
+    int translateNum(int num) {
+		string tmp = to_string(num);
+        int p = 0, q = 0, r = 1;
+        for (int i = 0; i < tmp.size(); ++i) {
+            p = q;
+            q = r;
+            r = 0;
+            r = r + q;	// f[i] = f[i-1]
+            if (i == 0) continue;	// 第一个直接跳过
+            string pre = tmp.substr(i-1, 2);	// 从i-1的位置开始截取2个字符
+            if (pre <= "25" && pre >= "10") r = r + p;
+        }
+        return r;
+    }
+};
+```
+
+
 
 ## [面试题56 - I. 数组中数字出现的次数](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)
 
