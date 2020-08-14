@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/e/Program/LeetCode/Coding/main.cpp
+iostream
+-
+array
+-
+string
+-
+map
+-
+unordered_map
+-
+vector
+-
+set
+-
+sstream
+-
+algorithm
+-
+cassert
+-
+queue
+-
+list
+-
+math.h
+-
+stack
+-
+

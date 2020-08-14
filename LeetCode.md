@@ -669,6 +669,67 @@ public:
 };
 ```
 
+## [63. 不同路径 II](https://leetcode-cn.com/problems/unique-paths-ii/)
+
+![image-20200706110831694](LeetCode.assets/image-20200706110831694.png)
+
+动态规划。使用`dp[i][j]`表示到达`[i,j]`的路径数，由于机器人只能向下或者向右移动，所以`dp[i][j]`只能从`dp[i-1][j]`或`dp[i][j-1]`移动过来。这样可以写出状态转移方程：
+$$
+dp(i,j) = \begin{cases} 0 & obstacleGrid(i,j)=1 \\
+dp(i-1,j) + dp(i, j-1) & obstacleGrid(i, j) = 0
+\end{cases}
+$$
+初始状态：如果`ob[0][0]==1`，那么`dp[0][0]=0`。
+
+```c++
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+		int row = obstacleGrid.size(), col = obstacleGrid[0].size();
+
+        vector<vector<int>> dp(row + 1, vector<int>(col + 1, 0));
+        // 空出第0行0列，从(0,1)开始向后遍历，初始化为1
+        dp[0][1] = 1;
+        for (int i = 1; i <= row; ++i) {
+            for (int j = 1; j <= col; ++j) {
+                if (obstacleGrid[i-1][j-1] == 1) 
+                    dp[i][j] == 0;
+                else
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                
+            }
+        }
+        return dp[row][col];
+    }
+};
+```
+
+空间可以进一步优化，在循环的过程中状态转移只用到了左边的元素和上边的元素。我们可以使用一个一维数组来累加行循环中每列拥有的最大路径数，相当于对每层外循环`dp`数组保存第`i`行中对应每列可以达到的最大路径和。在更新`dp[j]`之前，它是上一行的路径数，也就是`dp[i-1][j]`，而左边的`dp[j-1]`就是`dp[i][j-1]`：
+
+```c++
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+		int row = obstacleGrid.size(), col = obstacleGrid[0].size();
+
+        vector<int> dp(col);
+        // 空出第0行0列，从(0,1)开始向后遍历，初始化为1
+        dp[0] = (obstacleGrid[0][0] == 0);
+        for (int i = 0; i < row; ++i) {
+            for (int j = 0; j < col; ++j) {
+				if (obstacleGrid[i][j] == 1) {
+                    dp[j] = 0;
+                    continue;
+                }
+                if (j - 1 >= 0 && obstacleGrid[i][j-1] == 0)
+                    dp[j] += dp[j-1];
+            }
+        }
+        return dp.back();
+    }
+};
+```
+
 
 
 ## [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)

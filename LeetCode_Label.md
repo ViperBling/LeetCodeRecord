@@ -1,5 +1,155 @@
 [TOC]
 
+# 栈
+
+## [71. 简化路径](https://leetcode-cn.com/problems/simplify-path/)
+
+![image-20200630111535764](LeetCode_Label.assets/image-20200630111535764.png)
+
+首先对字符按照`/`进行分解，然后分解后的字符串，维护一个栈，如果当前字符串是`""`或者`.`，那么什么都不做；如果是`..`，从栈中弹出元素；其他情况则说明当前字符串是路径，压入栈中。算法流程：
+
+- 将字符串按照以`/`为截断分解循环读入，如果当前字符串是`""`或`"."`跳过循环
+- 如果当前字符串是`..`且栈不空，则出栈
+- 其他情况将当前字符串入栈
+
+```c++
+class Solution {
+public:
+    string simplifyPath(string path) {
+        // istringstream采用C++风格的字符串输入操作，将输入字符串放到字符串输入流is中
+        stringstream is(path);
+        // 由于后面要按照从栈底到栈顶的顺序输出字符串，所以直接采用列表或者数组比栈要方便一些
+        vector<string> strs;
+        string res = "", tmp = "";
+        while (getline(is, tmp, '/')) {
+            if (tmp == "" || tmp == ".") continue;
+            else if (tmp == ".." && !strs.empty())
+                strs.pop_back();
+            else if (tmp != "..")
+                strs.push_back(tmp);
+        }
+        for (string s : strs)
+            res += "/" + s;
+        if (res.empty())
+            return "/";
+        return res;
+    }
+};
+```
+
+## [144. 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+
+![image-20200709103603171](LeetCode_Label.assets/image-20200709103603171.png)
+
+递归，当树不空时循环，根左右的顺序。
+
+```c++
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+		vector<int> res;
+        _pre(root, res);
+        return res;
+    }
+    void _pre(TreeNode* root, vector<int>& v) {
+        if (root != nullptr) {
+            v.emplace_back(root->val);
+            _pre(root->left, v);
+            _pre(root->right, v);
+        }
+    }
+};
+```
+
+## [150. 逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)
+
+![image-20200709110141615](LeetCode_Label.assets/image-20200709110141615.png)
+
+后缀表达式求值。遍历字符串，如果遇到的是操作符，从栈中弹出两个数运算并将结果放入栈中；如果是操作数则转化成整型放入栈中。
+
+```c++
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+		if (tokens.empty()) 
+            return 0;
+        stack<int> st;
+        stringstream ss;
+        
+        for (auto c : tokens) {
+            if (c == "+" || c == "-" || c == "*" || c == "/") {
+                int tmp1 = st.top(); st.pop();
+                int tmp2 = st.top(); st.pop();
+                if (c == "+") st.push(tmp1 + tmp2);
+                else if (c == "-") st.push(tmp2 - tmp1);
+                else if (c == "*") st.push(tmp1 * tmp2);
+                else st.push(tmp2 / tmp1);
+            } else {
+                int num;
+                ss.clear();
+                ss << c;
+                ss >> num;
+                st.push(num);
+            }
+        }
+        return st.top();
+    }
+};
+```
+
+## [155. 最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+![image-20200715100851909](LeetCode_Label.assets/image-20200715100851909.png)
+
+![fig1](https://assets.leetcode-cn.com/solution-static/155/155_fig1.gif)
+
+最小栈中的元素总是自底向上降序的，最小的元素总是在栈顶。初始化的时候需要一个主栈一个辅助栈。入栈时，辅助栈直接入栈，最小栈只有在入栈元素小于栈顶元素才入栈，这样保证最小栈顶是整个序列中最小的。返回栈顶时直接返回辅助栈栈顶即可，因为辅助栈和最小栈一起入栈，这样辅助栈中保存了完整的序列。同样，出栈的时候两个栈一起出栈。
+
+```c++
+class MinStack {
+    stack<int> st;
+    stack<int> min_st;
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+        min_st.push(INT_MAX);
+    }
+    
+    void push(int x) {
+        st.push(x);
+        min_st.push(min(min_st.top(), x));
+    }
+    
+    void pop() {
+        st.pop();
+        min_st.pop();
+    }
+    
+    int top() {
+        return st.top();
+    }
+    
+    int getMin() {
+        return min_st.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
+```
+
+## [173. 二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator/)
+
+![image-20200716113322240](LeetCode_Label.assets/image-20200716113322240.png)
+
+
+
 # 数组
 
 ## [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -493,6 +643,75 @@ public:
 ![image-20200114204618235](LeetCode_Label.assets/image-20200114204618235.png)
 
 # 贪心算法
+
+## [44. 通配符匹配](https://leetcode-cn.com/problems/wildcard-matching/)
+
+![image-20200716113404209](LeetCode_Label.assets/image-20200716113404209.png)
+
+### 动态规划
+
+状态定义为当前匹配位置，即`dp[i][j]`定义为主串`s`的前`i`个字符和模式串`p`的前`j`个字符是否匹配。那么：
+
+- `p[j]`是普通小写字母：这种情况只有当`s[j]==p[j]`且`dp[i-1][j-1]`为真的时候才匹配，即
+  $$
+  dp[i][j] = (s[i] == p[j]) \and dp[i-1][j-1]
+  $$
+
+- `p[j]`是问号：这种情况对`s[i]`不做要求：
+  $$
+  dp[i][j] = dp[i-1][j-1]
+  $$
+
+- `p[j]`是*： *可以匹配任意字符串，如果使用这个星号，状态从`dp[i-1][j]`转移过来，不使用的话从`dp[i][j-1]`转移而来
+  $$
+  dp[i][j] = dp[i][j-1]\or dp[i-1][j]
+  $$
+
+总结而言，状态转移方程如下：
+$$
+dp[i][j] = \begin{cases}
+dp[i-1][j-1] & s[i]==p[j] \or p[j] == ? \\
+dp[i][j-1] \or dp[i-1][j] & p[j] == * \\
+False & Otherwise
+\end{cases}
+$$
+然后考虑边界条件，
+
+- 首先`dp[0][0]=True`，空匹配空。
+- `dp[i][0] = Flase`，空模式串匹配不了任何串
+- 对于`dp[0][j]`而言，只有前`j`个字符都是*时，才能匹配
+
+因此在初始化的时候可以将除了`dp[0][0]`以外的都初始化为False。
+
+```c++
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int slen = s.length();
+        int plen = p.length();
+        vector<vector<int>> dp(slen+1, vector<int>(plen+1));
+        dp[0][0] = true;
+        // 初始化边界条件
+        for (int i = 1; i <= plen; ++i) {
+            if (p[i-1] == '*')
+                dp[0][i] = true;
+            else
+                break;
+        }
+        for (int i = 1; i <= slen; ++i) {
+            for (int j = 1; j <= plen; ++j) {
+                if (p[j-1] == '*')
+                    dp[i][j] = dp[i][j-1] | dp[i-1][j];
+                else if (p[j-1] == '?' || s[i-1] == p[j-1])
+                    dp[i][j] = dp[i-1][j-1];
+            }
+        }
+        return dp[slen][plen];
+    }
+};
+```
+
+### 贪心算法
 
 
 
