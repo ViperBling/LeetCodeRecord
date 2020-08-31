@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/mnt/e/Program/LeetCode/Coding/build",
-  "command": "/usr/bin/clang++-9    -g   -o CMakeFiles/Coding.dir/main.cpp.o -c /mnt/e/Program/LeetCode/Coding/main.cpp",
-  "file": "/mnt/e/Program/LeetCode/Coding/main.cpp"
-}
-]

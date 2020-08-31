@@ -844,29 +844,225 @@ public:
 
 ![image-20200804120610383](LeetCode_Basic.assets/image-20200804120610383.png)
 
+双指针法，和之前不同，这里要保留两个重复数，所以需要三个指针，因为是有序的，覆盖位置在重复序列的第二个位置。设置快指针`fast`，初始指向`nums[2]`，慢指针`low`指向`nums[1]`，用`low-1`标识`nums[0]`。
 
+- 当快指针未到末尾时循环。如果`nums[fast]`不等于`nums[slow-1]`，说明在当前在重复数字的交界处，`slow`后移一位，然后将`fast`覆盖到`slow`的位置上，继续寻找超过三的重复数字序列
+- 如果`nums[fast] == nums[slow-1]`说明三个指针位于超过3的重复序列，`fast`后移，直到不相等，然后将`fast`指向的位置覆盖到`slow`。
+
+```c++
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int len = nums.size();
+        if (len <= 2) 
+            return len;
+
+        int low = 1;
+        for (int fast = 2; fast < len; ++fast) {
+            if (nums[low-1] != nums[fast]) 
+                nums[++low] = nums[fast];
+        }
+        return low+1;
+    }
+};
+```
 
 ## [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 
 ![image-20200804120639075](LeetCode_Basic.assets/image-20200804120639075.png)
 
+### 完成一半的插入排序
 
+第一种方法，可以将`nums1`看成完成了一半的插入排序，开始时两个指针分别指向第一个数组的结尾和第二个数组的开始，然后将第二个数组不断插入到第一个序列中。
+
+- 循环变量`i = m, j = 0`，然后定位插入范围`left = i - m, right = i - 1`。在这个范围内这般查找插入位置。因为`nums2`是有序的，当前面的数插入后，`[0,i-m]`这个范围肯定是最后的数字，不会改变，因为`nums2`中没有更小的数插入到这个范围了。
+- 找到插入位置后将`nums2`的数字插入，直到`j >= n`。
+
+```c++
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+
+        for (int i = m, j = 0; i < m + n, j < n; ++i, ++j) {
+            int left = i - m;
+            int right = i - 1;
+
+            while (left <= right) {
+                int mid = (left + right) >> 1;
+
+                if (nums1[mid] > nums2[j])
+                    right = mid - 1;
+                else 
+                    left = mid + 1;
+            }
+            for (int k = i - 1; k >= right+1; --k)
+                nums1[k+1] = nums1[k];
+            nums1[right+1] = nums2[j];
+        }
+    }
+};
+```
+
+### 合并后排序
+
+```c++
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        nums1.insert(nums1.begin() + m, nums2.begin(), nums2.begin() + n);
+        sort(nums1.begin(), nums1.begin() + m + n);
+        nums1.resize(m + n);
+    }
+};
+```
+
+### 双指针从后向前
+
+设置两个指针指向`nums1,nums2`的尾部，然后活动指针指在`m+n-1`的位置，比较`nums1,nums2`尾部数字的大小，将较大的插入到活动指针的位置。最后将剩余不空数组的数字插入到尾部。
+
+- 数组指针`p1, p2`指向两个数组的尾部，活动指针`p`指向最终数组的尾部。当`p1 >= 0 && p2 >= 0`的时候循环。
+- 如果`nums1[p1] < nums2[p2]`就在`nums1[p]`的位置放入`nums2[p2]`，然后对应指针左移。
+- 如果最后`p1 < 0`了，说明`nums2`中还有剩余数字，直接接到尾部。
+
+```c++
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int p1 = m-1, p2 = n-1, p = m+n-1;
+        
+        while (p1 >= 0 && p2 >= 0) {
+            nums1[p--] = nums1[p1] < nums2[p2] ? nums2[p2--] : nums1[p1--];
+        }
+        if (p1 < 0) {
+            while (p2 >= 0)
+                nums1[p--] = nums2[p2--];
+        }
+    }
+};
+```
 
 ## [125. 验证回文串](https://leetcode-cn.com/problems/valid-palindrome/)
 
 ![image-20200804120440274](LeetCode_Basic.assets/image-20200804120440274.png)
 
+用例中除了字母和数字以外都是非法字符，不计入结果，所以要将其过滤掉。设置左右两个指针，分别从头尾开始扫描。在过滤掉非法字符后，比较两个指针字符是否相等，如果相等，那么移动指针，否则返回`false`。
 
+```c++
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int len = s.length();
+        int left = 0;
+        int right = len - 1;
+
+        while (left < right) {
+            while (left < right && !(isdigit(s[left]) || isalpha(s[left])))
+                left++;
+            while (left < right && !(isdigit(s[right]) || isalpha(s[right])))
+                right--;
+            if (tolower(s[left]) != tolower(s[right]))
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
+```
 
 ## [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 
 ![image-20200804120232725](LeetCode_Basic.assets/image-20200804120232725.png)
 
+首先可以使用暴力法，对于数组中的每个数`num1`，在其后的数字里面寻找`num2 = target - num1`，找到后返回两者的索引。考虑到数组是有序的，采用双指针法，如果左右指针之和小于`target`，移动左指针，让数增大；否则移动右指针，让数减小。
+
+```c++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        vector<int> res;
+        int left = 0;
+        int right = numbers.size() - 1;
+
+        while (left < right) {
+            if (numbers[left] + numbers[right] < target)
+                left++;
+            else if (numbers[left] + numbers[right] > target)
+                right--;
+            else
+                break;
+        }
+        res.emplace_back(left + 1);
+        res.emplace_back(right + 1);
+        return res;
+    }
+};
+```
+
 ## [209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)
 
 ![image-20200804120302996](LeetCode_Basic.assets/image-20200804120302996.png)
 
+### 暴力法
 
+首先想到了暴力法，对每个数，从当前位置开始向后累加，直到和大于等于`s`，然后计算长度并更新。时间复杂度是$O(n^2)$。
+
+```c++
+class Solution {
+public:
+    int minSubArrayLen(int s, vector<int>& nums) {
+        int len = nums.size();
+        if (len == 0) return 0;
+        int minlen = INT_MAX;
+
+        for (int left = 0; left < len; ++left) {
+            int sum = 0;
+            for (int right = left; right < len; ++right) {
+                sum += nums[right];
+                if (sum >= s) {
+                    minlen = min(minlen, right - left + 1);
+                    break;
+                }
+            }
+        }
+        // 为了避免长度超出整数范围
+        return minlen == INT_MAX ? 0 : minlen;
+    }
+};
+```
+
+### 双指针
+
+从题目要求返回最小长度，以及是连续字数组看出应该可以使用双指针法。设置两个指针，对于每个以当前数字为结尾的子数组，不断减小子数组长度并判断是否满足大于`s`的条件，在这个过程中更新最小长度。
+
+- 设置左右指针`left,right`。当`right< len`的时候循环。
+- 每一轮迭代，将`sum += nums[right]`，如果`sum >= s`，那么更新最小长度，并且将左指针右移，`sum-nums[left]`，直到`sum < s`。
+- 循环的末尾右移一次右指针
+
+```c++
+class Solution {
+public:
+    int minSubArrayLen(int s, vector<int>& nums) {
+        int left = 0, right = 0;
+        int len = nums.size();
+        if (len == 0) return 0;
+
+        int minlen = INT_MAX;
+        int sum = 0;
+        while (right < len) {
+          // 每轮开始，首先累加上右端点
+            sum += nums[right];
+            while (sum >= s) { // 循环直到不满足条件，这时的minlen一定是当前状态下最小的
+                minlen = min(minlen, right - left + 1);
+                sum -= nums[left];
+                left++;
+            } // 右指针右移，增大查找范围
+            right++;
+        }
+        return minlen == INT_MAX ? 0 : minlen;
+    }
+};
+```
 
 ## [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
 

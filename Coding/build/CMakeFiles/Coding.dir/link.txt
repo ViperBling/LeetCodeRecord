@@ -1,1 +1,0 @@
-/usr/bin/clang++-9  -g  -rdynamic CMakeFiles/Coding.dir/main.cpp.o  -o Coding 
