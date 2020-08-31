@@ -1084,41 +1084,47 @@ public:
 
 ![image-20200804120757798](LeetCode_Basic.assets/image-20200804120757798.png)
 
-
-
-- #### **283  简单  移动零（必做）**
-
-- #### **75   中等  颜色分类（必做）**
-
-- #### **215  中等  数组中的第K个最大元素（必做）**
-
-- #### **167  简单  两数之和 II - 输入有序数组（必做）**
-
-- #### **209 中等  长度最小的子数组（必做）**
-
-- #### **3    中等 无重复字符的最长子串（必做）**
-
-- #### 27   简单  移除元素（选做）
-
-- #### 125  简单  验证回文串（选做）
-
-- #### 11   简单  盛最多水的容器（选做）
-
-- #### 26   简单  删除排序数组中的重复项（选做）
-
-- #### 80   中等  删除排序数组中的重复项 II（选做）
-
-- #### 88    简单  合并两个有序数组（选做）
-
-- #### 344  简单  反转字符串（选做）
-
-- #### 345  简单  反转字符串中的元音字母（选做）
-
-- #### 438  中等  找到字符串中所有字母异位词（选做）
-
-- #### 76   困难 最小覆盖子串（选做）
-
 # 查找
+
+## [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
+
+![image-20200831161300167](LeetCode_Basic.assets/image-20200831161300167.png)
+
+
+
+## [15. 三数之和](https://leetcode-cn.com/problems/3sum/)
+
+## [16. 最接近的三数之和](https://leetcode-cn.com/problems/3sum-closest/)
+
+## [18. 四数之和](https://leetcode-cn.com/problems/4sum/)
+
+## [49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
+
+## [149. 直线上最多的点数](https://leetcode-cn.com/problems/max-points-on-a-line/)
+
+## [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)
+
+## [205. 同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/)
+
+## [217. 存在重复元素](https://leetcode-cn.com/problems/contains-duplicate/)
+
+## [219. 存在重复元素 II](https://leetcode-cn.com/problems/contains-duplicate-ii/)
+
+## [220. 存在重复元素 III](https://leetcode-cn.com/problems/contains-duplicate-iii/)
+
+## [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+
+## [290. 单词规律](https://leetcode-cn.com/problems/word-pattern/)
+
+## [349. 两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
+
+## [350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
+
+## [447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs/)
+
+## [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/)
+
+## [454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)
 
 - #### **349  简单  两个数组的交集（必做）**
 
