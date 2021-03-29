@@ -4,7 +4,7 @@
 
 ## [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
 
-![image-20200720114724552](LeetCode_Basic.assets/image-20200720114724552.png)
+![image-20200720114724552](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200719174057572.png)
 
 关键在于如何确定倒数第n个结点，可以采用快慢指针，快指针先走n步，然后慢指针走，当快指针到表尾时，慢指针指向的就是倒数第n个结点，直接删除即可。
 
@@ -47,7 +47,7 @@ public:
 
 ## [21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
-![image-20200719174057572](LeetCode_Basic.assets/image-20200719174057572.png)
+![image-20200719174057572](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200719174057572.png)
 
 新建一个头结点，然后比较两个链表中的元素，小的加入新链表，直到其中一个链表为空，最后将不空的链表接入尾部。
 
@@ -114,7 +114,7 @@ public:
 
 ## [23. 合并K个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
 
-![image-20200719174146922](LeetCode_Basic.assets/image-20200719174146922.png)
+![image-20200719174146922](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200719174146922.png)
 
 维护一个结果链表res，然后依次将k个链表和res进行两个链表的合并。
 
@@ -160,7 +160,7 @@ public:
 
 ## [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
 
-![image-20200719174209648](LeetCode_Basic.assets/image-20200719174209648.png)
+![image-20200719174209648](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200719174209648.png)
 
 首先看交换4个结点的过程：`1->2->3->4`，从头到尾`1->next=2->next;2->next=1; 1->next=4; 3->next=4->next;4->next=3;`，可以看出如果反过来从尾到头的话，后面的可以看成已经反转好的链表，重复的步骤就是`1->next=2->next;2->next=1`。可以采用递归的方法：
 
@@ -213,7 +213,7 @@ public:
 
 ## [25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
 
-![image-20200721123957387](LeetCode_Basic.assets/image-20200721123957387.png)
+![image-20200721123957387](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200721123957387.png)
 
 翻转k长度的链表可以看成一个单独的问题，那么原题就可以理解成如果k个一组进行翻转
 
@@ -230,7 +230,7 @@ public:
 
 ## [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)
 
-![image-20200727095446845](LeetCode_Basic.assets/image-20200727095446845.png)
+![image-20200727095446845](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200727095446845.png)
 
 由于k可能大于链表长度n，所以只要取模就可以了`k = k % n`。然后将尾指针指向头部，头部指针向后走`n-k`步指向新链表的头，并断开前面结点的连接即可。
 
@@ -271,7 +271,7 @@ public:
 
 ## [82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
 
-![image-20200727114559316](LeetCode_Basic.assets/image-20200727114559316.png)
+![image-20200727114559316](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200727114559316.png)
 
 采用快慢指针的方法，如果快指针等于慢指针，慢指针停住，让快指针走，直到两者不相等。然后快指针的前驱直接指向慢指针。
 
@@ -323,7 +323,7 @@ public:
 
 ## [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
 
-![image-20200728110214000](LeetCode_Basic.assets/image-20200728110214000.png)
+![image-20200728110214000](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200728110214000.png)
 
 和上一题类似，不过这里要保留重复的元素。双指针即可，一个慢指针`slow`，一个快指针`fast`，开始遍历，如果两个结点值相同，`fast`后移，当不相等的时候，删除中间结点，继续遍历。
 
@@ -362,7 +362,7 @@ public:
 
 ## [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
-![image-20200728135513964](LeetCode_Basic.assets/image-20200728135513964.png)
+![image-20200728135513964](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200728135513964.png)
 
 快慢指针，快指针走两步，慢指针走一步，如果有环，两个指针肯定会相遇。就像两个速度不一样的运动员绕圈跑，快的可以套圈一样。
 
@@ -390,7 +390,7 @@ public:
 
 ## [143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)
 
-![image-20200728140204549](LeetCode_Basic.assets/image-20200728140204549.png)
+![image-20200728140204549](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200728140204549.png)
 
 链表从中间折半，前半段正序，后半段逆序。先找到中间结点，然后从中间断开，后半段逆置，新建一个头部结点，然后用尾插法依次插入正序链表和逆序链表。
 
@@ -443,9 +443,9 @@ public:
 
 ## [147. 对链表进行插入排序](https://leetcode-cn.com/problems/insertion-sort-list/)
 
-![img](LeetCode_Basic.assets/Insertion-sort-example-300px.gif)
+![img](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//Insertion-sort-example-300px.gif)
 
-![image-20200729140101557](LeetCode_Basic.assets/image-20200729140101557.png)
+![image-20200729140101557](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200729140101557.png)
 
 建立一个新结点，然后将链表里面的结点按序插入到新的链表中。新建结点`dumy`指向已排序部分，用`cur`指向`head`代表未排序部分。将未排序部分依次插入，为了找到合适的插入位置，不能从后向前遍历，而是要从`dumy`开始，向后遍历，找到合适的插入位置，为此还要维护一个`pre`结点指向待插入结点前一个结点。
 
@@ -496,7 +496,7 @@ public:
 
 ## [148. 排序链表](https://leetcode-cn.com/problems/sort-list/)
 
-![image-20200803142240766](LeetCode_Basic.assets/image-20200803142240766.png)
+![image-20200803142240766](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200803142240766.png)
 
 上一题中的插入排序时间复杂度为$O(n^2)$，空间复杂度是$O(1)$。题目要求$O(n\log n)$，那么可以采用归并排序的方法。首先是递归的方法，递归的空间复杂度不满足要求，但是可以比较清晰的展示解决问题的步骤：
 
@@ -543,7 +543,7 @@ public:
 
 ## [203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)
 
-![image-20200722111927297](LeetCode_Basic.assets/image-20200722111927297.png)
+![image-20200722111927297](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200722111927297.png)
 
 遍历链表找到指定的结点，这时要保存一个前驱结点，便于删除。中间的结点很好删除，但是头部结点如果也是待删除结点的话会比较复杂，所以可以给链表加一个伪头部。
 
@@ -573,7 +573,7 @@ public:
 
 ## [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
-![image-20200721152218451](LeetCode_Basic.assets/image-20200721152218451.png)
+![image-20200721152218451](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200721152218451.png)
 
 ### 迭代:
 
@@ -644,7 +644,7 @@ public:
 
 ## [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
 
-![image-20200722103637320](LeetCode_Basic.assets/image-20200722103637320.png)
+![image-20200722103637320](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200722103637320.png)
 
 找到结点删除即可，但是删除的时候要使用前一个结点才能删除当前结点，可以和后一个结点交换，这样就能直接删除了。
 
@@ -662,7 +662,7 @@ public:
 
 ## [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 
-![image-20200804120325043](LeetCode_Basic.assets/image-20200804120325043.png)
+![image-20200804120325043](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120325043.png)
 
 设置一个集合set，里面保存不重复的子串。设置两个指针记录不重复子串的长度。遍历字符串，当前遍历的字符在集合中时，说明和之前的字符重复了，将当前字符从集合中删除，继续向后遍历。否则将当前字符加入集合中，更新不重复子串长度。
 
@@ -693,7 +693,7 @@ public:
 
 ## [11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)
 
-![image-20200804120509614](LeetCode_Basic.assets/image-20200804120509614.png)
+![image-20200804120509614](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120509614.png)
 
 最多的盛水量仅由两端的高度决定，而且仅由较矮的那个决定。采用双指针法，头尾各一个。保存一个当前水量值和最大值，如果当前左右指针指向的高度可以存储更多的水就更新。更新完成后，如果左边较矮，左指针右移；右边较矮，右指针左移。
 
@@ -724,7 +724,7 @@ public:
 
 ## [26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
-![image-20200804120537487](LeetCode_Basic.assets/image-20200804120537487.png)
+![image-20200804120537487](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120537487.png)
 
 因为是排序链表，所以重复的元素肯定在一起。采用快慢指针法，慢指针指向重复部分的开头，快指针指向重复部分结尾的下一个数，然后将快指针的数填充到慢指针的下一个位置。因为返回的是最后不重复数组的长度，所以慢指针可以用长度直接代替。
 
@@ -750,7 +750,7 @@ public:
 
 ## [27. 移除元素](https://leetcode-cn.com/problems/remove-element/)
 
-![image-20200804120404667](LeetCode_Basic.assets/image-20200804120404667.png)
+![image-20200804120404667](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120404667.png)
 
 最终的结果是将所有不是要删除的元素放到数组的前面，然后返回索引长度。所以我们在遍历的时候就可以维护一个数组长度`len`，如果当前元素不是待删除的，就将其放到前面结果数组的尾部，尾部索引也就是数组长度`len`。
 
@@ -774,7 +774,7 @@ public:
 
 ## [75. 颜色分类](https://leetcode-cn.com/problems/sort-colors/)
 
-![image-20200804120112299](LeetCode_Basic.assets/image-20200804120112299.png)
+![image-20200804120112299](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120112299.png)
 
 可以使用快速排序的分区算法，对数组进行划分。如果是0，放在左边，是2放在右边。先采用以前用的快排的分区算法，初始化两个指针，头尾各一：
 
@@ -827,7 +827,7 @@ public:
 
 ## [76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
 
-![image-20200804120822483](LeetCode_Basic.assets/image-20200804120822483.png)
+![image-20200804120822483](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120822483.png)
 
 
 
@@ -842,7 +842,7 @@ public:
 
 ## [80. 删除排序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)
 
-![image-20200804120610383](LeetCode_Basic.assets/image-20200804120610383.png)
+![image-20200804120610383](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120610383.png)
 
 双指针法，和之前不同，这里要保留两个重复数，所以需要三个指针，因为是有序的，覆盖位置在重复序列的第二个位置。设置快指针`fast`，初始指向`nums[2]`，慢指针`low`指向`nums[1]`，用`low-1`标识`nums[0]`。
 
@@ -869,7 +869,7 @@ public:
 
 ## [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 
-![image-20200804120639075](LeetCode_Basic.assets/image-20200804120639075.png)
+![image-20200804120639075](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120639075.png)
 
 ### 完成一半的插入排序
 
@@ -943,7 +943,7 @@ public:
 
 ## [125. 验证回文串](https://leetcode-cn.com/problems/valid-palindrome/)
 
-![image-20200804120440274](LeetCode_Basic.assets/image-20200804120440274.png)
+![image-20200804120440274](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120440274.png)
 
 用例中除了字母和数字以外都是非法字符，不计入结果，所以要将其过滤掉。设置左右两个指针，分别从头尾开始扫描。在过滤掉非法字符后，比较两个指针字符是否相等，如果相等，那么移动指针，否则返回`false`。
 
@@ -972,7 +972,7 @@ public:
 
 ## [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 
-![image-20200804120232725](LeetCode_Basic.assets/image-20200804120232725.png)
+![image-20200804120232725](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120232725.png)
 
 首先可以使用暴力法，对于数组中的每个数`num1`，在其后的数字里面寻找`num2 = target - num1`，找到后返回两者的索引。考虑到数组是有序的，采用双指针法，如果左右指针之和小于`target`，移动左指针，让数增大；否则移动右指针，让数减小。
 
@@ -1001,7 +1001,7 @@ public:
 
 ## [209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)
 
-![image-20200804120302996](LeetCode_Basic.assets/image-20200804120302996.png)
+![image-20200804120302996](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120302996.png)
 
 ### 暴力法
 
@@ -1066,29 +1066,29 @@ public:
 
 ## [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
 
-![image-20200804120203504](LeetCode_Basic.assets/image-20200804120203504.png)
+![image-20200804120203504](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120203504.png)
 
 ## [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)
 
-![image-20200804120045358](LeetCode_Basic.assets/image-20200804120045358.png)
+![image-20200804120045358](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120045358.png)
 
 ## [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string/)
 
-![image-20200804120709205](LeetCode_Basic.assets/image-20200804120709205.png)
+![image-20200804120709205](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120709205.png)
 
 ## [345. 反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/)
 
-![image-20200804120732282](LeetCode_Basic.assets/image-20200804120732282.png)
+![image-20200804120732282](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120732282.png)
 
 ## [438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
 
-![image-20200804120757798](LeetCode_Basic.assets/image-20200804120757798.png)
+![image-20200804120757798](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200804120757798.png)
 
 # 查找
 
 ## [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 
-![image-20200831161300167](LeetCode_Basic.assets/image-20200831161300167.png)
+![image-20200831161300167](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200831161300167.png)
 
 
 

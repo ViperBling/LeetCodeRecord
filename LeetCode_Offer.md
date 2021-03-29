@@ -2,7 +2,7 @@
 
 ## [面试题03. 数组中重复的数字](https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/)
 
-![image-20200226160353633](LeetCode_剑指Offer.assets/image-20200226160353633.png)
+![image-20200226160353633](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200226160353633.png)
 
 指定一个数组作为hash表，数组的索引代表数字，内容表示每个数字出现的次数，先统计一遍数字出现的次数，然后输出第一个内容不为0的值。
 
@@ -28,7 +28,7 @@ public:
 
 ## [面试题04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
-![image-20200226162103773](LeetCode_剑指Offer.assets/image-20200226162103773.png)
+![image-20200226162103773](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200226162103773.png)
 
 线性查找：从右端开始，如果当前数`nums`大于`target`，那么向左移动一列；如果当前数小于`target`，向下移动一行。
 
@@ -61,7 +61,7 @@ public:
 
 ## [面试题05. 替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
 
-![image-20200227113436166](LeetCode_剑指Offer.assets/image-20200227113436166.png)
+![image-20200227113436166](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200227113436166.png)
 
 逐个判断原字符串字符是否为空格，如果是就加上'%20'，否则加上原字符：
 
@@ -84,7 +84,7 @@ public:
 
 ## [面试题06. 从尾到头打印链表](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/)
 
-![image-20200227114801531](LeetCode_剑指Offer.assets/image-20200227114801531.png)
+![image-20200227114801531](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200227114801531.png)
 
 将链表值入栈，出栈入数组：
 
@@ -112,11 +112,11 @@ public:
 
 ## [面试题07. 重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)
 
-![image-20200227115345726](LeetCode_剑指Offer.assets/image-20200227115345726.png)
+![image-20200227115345726](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200227115345726.png)
 
 ## [面试题09. 用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
 
-![image-20200318124019522](LeetCode_剑指Offer.assets/image-20200318124019522.png)
+![image-20200318124019522](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200318124019522.png)
 
 队列是先进先出的结构，栈是先进后出，首先是插入元素：
 
@@ -168,7 +168,7 @@ public:
 
 ## [面试题10- I. 斐波那契数列](https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/)
 
-![image-20200318125659099](LeetCode_剑指Offer.assets/image-20200318125659099.png)
+![image-20200318125659099](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200318125659099.png)
 
 使用动态规划，初始状态是$f(0)$和$f(1)$，状态就是对应$n$的值，状态转移方程是$dp[i] = dp[i-1]+dp[i-2]$。
 
@@ -190,7 +190,7 @@ public:
 
 ## [面试题10- II. 青蛙跳台阶问题](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
 
-![image-20200318130537156](LeetCode_剑指Offer.assets/image-20200318130537156.png)
+![image-20200318130537156](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200318130537156.png)
 
 和上一个斐波那契类似，也是动态规划的方法。
 
@@ -223,7 +223,7 @@ public:
 
 ## [面试题11. 旋转数组的最小数字](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)
 
-![image-20200319145312431](LeetCode_剑指Offer.assets/image-20200319145312431.png)
+![image-20200319145312431](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200319145312431.png)
 
 采用二分法，三个指针：`left, right, mid`。如果`nums[mid] > nums[right]`，说明旋转的中心点在后半段，最小值也在后半段，所以：`left = mid + 1`；如果`nums[mid] == nums[right]`，这样只能排除`nums[right]`，下一轮的搜索区间变成`[left, right - 1]`；如果`nums[mid] < nums[right]`，中心点在前半段，`right = mid`。
 
@@ -254,7 +254,7 @@ public:
 
 ## [面试题12. 矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
 
-![image-20200325095541081](LeetCode_剑指Offer.assets/image-20200325095541081.png)
+![image-20200325095541081](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200325095541081.png)
 
 先找到一个可以开始搜索的位置，匹配的是`word[0]`，然后从当前位置开始深度优先搜索，深度优先搜索使用递归的方法：
 
@@ -299,7 +299,7 @@ public:
 
 ## [面试题13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)
 
-![image-20200327152449668](LeetCode_剑指Offer.assets/image-20200327152449668.png)
+![image-20200327152449668](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200327152449668.png)
 
 回溯算法，从当前位置开始递归搜索。
 
@@ -328,7 +328,7 @@ public:
 
 ## [面试题14- I. 剪绳子](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)
 
-![image-20200329142310634](LeetCode_剑指Offer.assets/image-20200329142310634.png)
+![image-20200329142310634](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200329142310634.png)
 
 绳子长度为`n`，剪成长度为`l`的段，每段绳子的最大乘积。可以采用动态规划解决，令`dp[i]`表示长度为`i`的绳子能剪到的最大乘积，那么就有状态转移方程：
 $$
@@ -356,7 +356,7 @@ public:
 
 ## [面试题14- II. 剪绳子 II](https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/)
 
-![image-20200331154942642](LeetCode_剑指Offer.assets/image-20200331154942642.png)
+![image-20200331154942642](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200331154942642.png)
 
 总结规律可以发现，`n`从1到6，可以得到`n`的最大不可分割的值是9（3*3），对于其他数，都可以由1到6的分割方法组合得到。例如10可以分成2x2x3x3=36，也就是4的分割和6的分割的乘积。
 
@@ -383,7 +383,7 @@ public:
 
 ## [面试题15. 二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/)
 
-![image-20200331160300571](LeetCode_剑指Offer.assets/image-20200331160300571.png)
+![image-20200331160300571](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200331160300571.png)
 
 不断右移，如果是1，答案加1，否则不变。右移的操作可以通过除2实现，除2的结果余数如果是0，不加，否则就加一。
 
@@ -404,7 +404,7 @@ public:
 
 ## [面试题16. 数值的整数次方](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)
 
-![image-20200402130243851](LeetCode_剑指Offer.assets/image-20200402130243851.png)
+![image-20200402130243851](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200402130243851.png)
 
 已知$x^n$，要求$x^{n+1}$，只需要计算$x^n \times x^n$即可，这样就可以用递归来解决了。负幂可以通过倒数转化成正幂计算。
 
@@ -437,7 +437,7 @@ public:
 
 ## [面试题17. 打印从1到最大的n位数](https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/)
 
-![image-20200403132232974](LeetCode_剑指Offer.assets/image-20200403132232974.png)
+![image-20200403132232974](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200403132232974.png)
 
 最直接的方法，将计算$10^n$，然后循环数组：
 
@@ -457,7 +457,7 @@ public:
 
 ## [面试题18. 删除链表的节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
 
-![image-20200404154022666](LeetCode_剑指Offer.assets/image-20200404154022666.png)
+![image-20200404154022666](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200404154022666.png)
 
 非常基础，直接遍历链表，找到对应值的结点，然后删除即可。
 
@@ -493,7 +493,7 @@ public:
 
 ## [面试题19. 正则表达式匹配](https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/)
 
-![image-20200405111254986](LeetCode_剑指Offer.assets/image-20200405111254986.png)
+![image-20200405111254986](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200405111254986.png)
 
 假设主串为A，模式串为B。从最末端开始匹配，假设A的长度是`n`，B的长度是`m`，按照B的最后一个字符，有三种情况：
 
@@ -555,7 +555,7 @@ public:
 
 ## [面试题20. 表示数值的字符串](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/)
 
-![image-20200407110149725](LeetCode_剑指Offer.assets/image-20200407110149725.png)
+![image-20200407110149725](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200407110149725.png)
 
 计数规则：
 
@@ -632,7 +632,7 @@ public:
 
 ## [面试题21. 调整数组顺序使奇数位于偶数前面](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/)
 
-![image-20200407110235349](LeetCode_剑指Offer.assets/image-20200407110235349.png)
+![image-20200407110235349](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200407110235349.png)
 
 第一种是双指针法，借鉴了快速排序中的分区操作，类似于将比枢轴小的放在前面，比枢轴大的放在后面，这里将奇数放在前面，偶数放在后面。左指针向前，找到第一个偶数，右指针向后，找到第一个奇数，交换位置。如此进行直到相遇。
 
@@ -675,5 +675,5 @@ public:
 
 ## [面试题22. 链表中倒数第k个节点](https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
-![image-20200513083917312](LeetCode_剑指Offer.assets/image-20200513083917312.png)
+![image-20200513083917312](https://gitee.com/ArtoriasZero/FigureEmbed/raw/master/img//image-20200513083917312.png)
 
